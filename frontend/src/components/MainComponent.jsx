@@ -4,13 +4,15 @@ import AddUserButton from "./AddUser";
 import DisplayUsers from "./DisplayUsers";
 import NewUserForm from "./NewUserForm";
 import axios from "axios";
+import { useUser } from '../UserContext';
 
 const MainComponent = () => {
-  const [users, setUsers] = useState([]);
+  const { users, setUsers } = useUser();
   const [showForm, setShowForm] = useState(false);
   const baseUrl = "https://jsonplaceholder.typicode.com/users/";
 
   console.log('Rendering...')
+  console.log('users', users)
   useEffect(() => {
     axios
       .get(baseUrl)
@@ -45,7 +47,7 @@ const MainComponent = () => {
   }
 
   return (
-    <div className="flex flex-col items-center justify-start md:justify-center pt-8 md:pt-0 min-h-screen space-y-4">
+    <div className="flex flex-col items-center pt-8">
       <AddUserButton
         className="justify-start"
         showForm={showForm}

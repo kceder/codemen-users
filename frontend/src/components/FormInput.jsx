@@ -1,19 +1,20 @@
 const FormInput = ({ label, name, value = "", onChange, type = "text", error }) => {
   return (
-    <div className="mb-4">
-      <label className="block text-gray-700 text-sm font-bold mb-2">
-        {label}
-      </label>
+    <div className="mb-4 relative">
       <input
-        className={`shadow appearance-none border ${
-          error ? "border-red-500" : ""
-        } rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline`}
+        className={`block w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none border-b ${
+          error ? "border-red-500" : "border-sky-300"
+        } focus:border-blue-500`}
         type={type}
         name={name}
         value={value}
         onChange={onChange}
+        placeholder={label}
       />
-      {error && <p className="text-red-500 text-xs italic">{error}</p>}
+      <div className={`absolute inset-0 ${error ? "border-red-500" : ""} pointer-events-none`}>
+        <div className={`h-5 border-t border-r border-l border-transparent absolute bottom-0 w-full ${error ? "border-red-500" : "border-gray-300"}`}></div>
+      </div>
+      {error && <p className="text-red-500 text-xs">{error}</p>}
     </div>
   );
 };
