@@ -1,17 +1,18 @@
-import { useState } from 'react'
-import HeaderComponent from './components/HeaderComponent'
-import FooterComponent from './components/FooterComponent'
-import MainComponent from './components/MainComponent'
+import HeaderComponent from "./components/HeaderComponent";
+import FooterComponent from "./components/FooterComponent";
+import MainComponent from "./components/MainComponent";
+import { UserProvider } from "./UserContext";
 
 function App() {
-
   return (
-    <div className='h-screen bg-white dark:bg-[#111828]'>
-      <HeaderComponent />
-      <MainComponent />
-      <FooterComponent />
-    </div>
-  )
+    <UserProvider>
+      <div className="max-h-screen">
+        <HeaderComponent />
+        <MainComponent />
+        <FooterComponent />
+      </div>
+    </UserProvider>
+  );
 }
 
-export default App
+export default App;
