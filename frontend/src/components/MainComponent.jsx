@@ -2,17 +2,17 @@ import React from "react";
 import { useState, useEffect } from "react";
 import AddUserButton from "./AddUser";
 import DisplayUsers from "./DisplayUsers";
-import NewUserForm from "./NewUserForm";
+import NewUserForm from "./NewUserContainer";
 import axios from "axios";
-import { useUser } from '../UserContext';
+import { useUser } from "../UserContext";
 
 const MainComponent = () => {
   const { users, setUsers } = useUser();
   const [showForm, setShowForm] = useState(false);
   const baseUrl = "https://jsonplaceholder.typicode.com/users/";
 
-  console.log('Rendering...')
-  console.log('users', users)
+  console.log("Rendering...");
+  console.log("users", users);
   useEffect(() => {
     axios
       .get(baseUrl)
@@ -47,12 +47,11 @@ const MainComponent = () => {
   }
 
   return (
-    <div className="flex flex-col items-center pt-8">
-      <AddUserButton
-        className="justify-start"
-        showForm={showForm}
-        setShowForm={setShowForm}
-      />
+    <div className="flex flex-grow flex-col items-center pt-8 w-full">
+      <div>
+        <AddUserButton showForm={showForm} setShowForm={setShowForm} />
+      </div>
+
       <DisplayUsers users={users} deleteUser={deleteUser} />
       {showForm && (
         <NewUserForm

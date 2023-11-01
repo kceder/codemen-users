@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import Modal from "./Modal";
+import Modal from "./NewUserModal";
 import UserForm from "./UserForm";
 import { useUser } from '../UserContext';
 
@@ -14,7 +14,7 @@ const NewUserForm = ({ setShowForm }) => {
     axios
       .post(baseUrl, formData)
       .then((response) => {
-        setUsers([...users, response.data]);
+        setUsers([response.data, ...users]);
         setShowForm(false);
       })
       .catch((error) => {

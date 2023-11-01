@@ -6,7 +6,7 @@ import { UserProvider } from "./UserContext";
 function App() {
   return (
     <UserProvider>
-      <div className="max-h-screen">
+      <div className="flex flex-col min-h-screen">
         <HeaderComponent />
         <MainComponent />
         <FooterComponent />
