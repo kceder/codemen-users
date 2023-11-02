@@ -3,7 +3,7 @@ import axios from "axios";
 
 const UserContext = createContext();
 
-const baseUrl = "https://jsonplaceholder.typicode.com/users/";
+const baseUrl = "http://localhost:5000/users";
 
 const UserProvider = ({ children }) => {
   const [users, setUsers] = useState([]);

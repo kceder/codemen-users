@@ -8,17 +8,15 @@ const DisplayUsers = ({ deleteUser }) => {
   const { users } = useUser();
   const [selectedUserId, setSelectedUserId] = useState(null);
 
-  // State for Pagination
   const [currentPage, setCurrentPage] = useState(1);
   const [usersPerPage] = useState(10); // This denotes how many users you'd like to display per page
 
-  // Get current users
   const indexOfLastUser = currentPage * usersPerPage;
   const indexOfFirstUser = indexOfLastUser - usersPerPage;
   const currentUsers = users.slice(indexOfFirstUser, indexOfLastUser);
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
-  console.log("currentPage", currentPage);
+  
   return (
     <div className="mt-4 w-[90%]">
       <div className="hidden lg:block p-2 border rounded-2xl shadow-md bg-white">

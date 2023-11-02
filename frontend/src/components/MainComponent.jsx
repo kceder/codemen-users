@@ -9,10 +9,10 @@ import { useUser } from "../UserContext";
 const MainComponent = () => {
   const { users, setUsers } = useUser();
   const [showForm, setShowForm] = useState(false);
-  const baseUrl = "https://jsonplaceholder.typicode.com/users/";
+  const baseUrl = "http://localhost:5000/users/";
 
   console.log("Rendering...");
-  console.log("users", users);
+
   useEffect(() => {
     axios
       .get(baseUrl)

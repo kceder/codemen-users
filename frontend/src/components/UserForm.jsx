@@ -92,6 +92,7 @@ const UserForm = ({ submitForm }) => {
 
     if (isValid) {
       const formatedUserObj = {
+        id: Math.floor(Math.random() * 1000),
         name: formData.name,
         email: formData.email,
         phone: formData.phone,
