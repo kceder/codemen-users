@@ -44,9 +44,11 @@ app.get("/users", async (req, res) => {
 app.post("/users", async (req, res) => {
   try {
     const newUser = req.body;
+    console.log('newUser', newUser)
+    const docId = String(newUser.id);
     const userCollection = db.collection("users");
-    const result = await userCollection.add(newUser);
-    console.log("newUser:", newUser);
+    const result = await userCollection.doc(docId).set(newUser);
+    console.log('result', result)
     res.status(201).send(newUser);
   } catch (error) {
     res.status(500).send(error.message);
@@ -58,10 +60,12 @@ app.put("/users/:id", async (req, res) => {
   try {
     const { id } = req.params;
     const updatedUser = req.body;
+    console.log('updatedUser', updatedUser)
     const userCollection = db.collection("users");
     await userCollection.doc(id).update(updatedUser);
     res.status(200).send(updatedUser);
   } catch (error) {
+    console.error("Error updating user:", error);
     res.status(500).send(error.message);
   }
 });

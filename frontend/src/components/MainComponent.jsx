@@ -1,16 +1,17 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import AddUserButton from "./AddUser";
+import AddUserButton from "./AddUserButton";
 import DisplayUsers from "./DisplayUsers";
-import NewUserForm from "./NewUserContainer";
+import UserModal from "./UserModal";
 import axios from "axios";
 import { useUser } from "../UserContext";
 
 const MainComponent = () => {
   const { users, setUsers } = useUser();
-  const [showForm, setShowForm] = useState(false);
-  const baseUrl = "http://localhost:5000/users/";
+  const [showModal, setShowModal] = useState(false);
+  const [editUser, setEditUser] = useState(null);
 
+  const baseUrl = "http://localhost:5000/users/";
   console.log("Rendering...");
 
   useEffect(() => {
@@ -36,28 +37,23 @@ const MainComponent = () => {
       });
   };
 
-  if (users.length === 0) {
-    return (
-      <div className="flex justify-center items-center min-h-screen">
-        <h2 className="text-2xl font-bold text-center text-gray-800 dark:text-white">
-          Loading...
-        </h2>
-      </div>
-    );
-  }
-
   return (
     <div className="flex flex-grow flex-col items-center pt-8 w-full">
       <div>
-        <AddUserButton showForm={showForm} setShowForm={setShowForm} />
+        <AddUserButton showModal={showModal} setShowModal={setShowModal} />
       </div>
 
-      <DisplayUsers users={users} deleteUser={deleteUser} />
-      {showForm && (
-        <NewUserForm
-          setShowForm={setShowForm}
-          users={users}
-          setUsers={setUsers}
+      <DisplayUsers
+        users={users}
+        deleteUser={deleteUser}
+        setShowModal={setShowModal}
+        setEditUser={setEditUser}
+      />
+      {showModal && (
+        <UserModal
+          setShowModal={setShowModal}
+          editUser={editUser}
+          setEditUser={setEditUser}
         />
       )}
     </div>

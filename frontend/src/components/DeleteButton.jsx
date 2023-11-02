@@ -1,12 +1,12 @@
-const DeleteButton = ({ onDelete }) => {
+const ActionButton = ({ action, label, color, hoverColor }) => {
   return (
     <button
-      onClick={onDelete}
-      className="text-red-500 hover:text-red-700 text-sm font-semibold transition duration-150"
+      onClick={action}
+      className={`${color} ${hoverColor} text-sm font-semibold transition duration-150 ml-1`}
     >
-      Delete
+      {label}
     </button>
   );
 };
 
-export default DeleteButton;
+export default ActionButton;
