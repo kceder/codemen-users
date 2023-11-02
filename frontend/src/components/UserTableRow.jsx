@@ -1,6 +1,7 @@
 import DeleteButton from "./DeleteButton";
 
 const UserTableRow = ({ user, onDelete, index }) => {
+  console.log('user', user)
   return (
     <tr className={index % 2 === 0 ? "bg-gray-50 hover:bg-gray-100" : "hover:bg-gray-100"}>
       <td className="text-left p-2 w-40">{user.name}</td>
