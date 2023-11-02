@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import FormInput from "./FormInput";
+import { v4 as uuidv4 } from 'uuid';
 
 const validateName = (name) => {
   if (!name) return "Name is required.";
@@ -54,7 +55,8 @@ const validateCity = (city) => {
   return null;
 };
 
-const UserForm = ({ submitForm }) => {
+const UserForm = ({ submitForm, userToEdit }) => {
+  console.log('userToEdit', userToEdit)
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -64,6 +66,21 @@ const UserForm = ({ submitForm }) => {
     address: "",
     city: "",
   });
+
+  useEffect(() => {
+    if (userToEdit) {
+      setFormData({
+        name: userToEdit.name || "",
+        email: userToEdit.email || "",
+        phone: userToEdit.phone || "",
+        website: userToEdit.website || "",
+        company: userToEdit.company.name || "",
+        address: userToEdit.address.street || "",
+        city: userToEdit.address.city || ""
+      });
+    }
+  }, [userToEdit]);
+  
 
   const [errors, setErrors] = useState({});
 
@@ -89,10 +106,10 @@ const UserForm = ({ submitForm }) => {
 
     setErrors(newErrors);
     const isValid = !Object.values(newErrors).some((error) => error !== null);
-
+    const newId = uuidv4();
     if (isValid) {
       const formatedUserObj = {
-        id: Math.floor(Math.random() * 1000),
+        id: userToEdit ? userToEdit.id : newId,
         name: formData.name,
         email: formData.email,
         phone: formData.phone,

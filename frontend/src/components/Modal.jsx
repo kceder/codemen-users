@@ -1,4 +1,5 @@
-const NewUserModal = ({ children, onClose }) => {
+const Modal = ({ title, children, onClose }) => {
+  console.log('title', title)
   return (
     <div className="fixed inset-0 flex items-center justify-center z-50 w-auto">
       <div
@@ -6,6 +7,7 @@ const NewUserModal = ({ children, onClose }) => {
         onClick={onClose}
       ></div>
       <div className="bg-white p-6 rounded-lg shadow-lg relative z-10 w-80 sm:w-96">
+        <h2 className="mb-4 text-xl">{title}</h2>
         {children}
         <button onClick={onClose} className="absolute top-2 right-2 text-xl">
           &times;
@@ -15,4 +17,4 @@ const NewUserModal = ({ children, onClose }) => {
   );
 };
 
-export default NewUserModal;
+export default Modal;
