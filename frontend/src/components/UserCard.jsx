@@ -37,7 +37,7 @@ const UserCard = ({
             company:<span className="ml-2">{user.company.name}</span>
           </div>
           <div className="mb-2">
-            address:<span className="ml-2">{user.address.street}</span>
+            address:<span className="ml-2">{user.address.street}, {user.address.city}</span>
           </div>
           <div>
             <ActionButton

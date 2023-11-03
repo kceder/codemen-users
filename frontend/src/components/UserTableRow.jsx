@@ -19,7 +19,7 @@ const UserTableRow = ({ user, onDelete, index, setShowModal, setEditUser }) => {
       <td className="text-left p-2 w-40 font-sans">{user.phone}</td>
       <td className="text-left p-2 w-40 font-sans">{user.website}</td>
       <td className="text-left p-2 w-40 font-sans">{user.company.name}</td>
-      <td className="text-left p-2 w-40 font-sans">{user.address.street}</td>
+      <td className="text-left p-2 w-40 font-sans">{user.address.street}, {user.address.city}</td>
       <td className="text-left p-2 font-sans w-6">
         <ActionButton // Button to edit user
           action={() => { setShowModal(true); setEditUser(user); }}

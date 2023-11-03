@@ -7,7 +7,7 @@
     "install:frontend": "cd frontend && npm install",
     "start:backend": "cd backend && npm start",
     "start:frontend": "cd frontend && npm start",
-    "prestart": "npm run install:backend && npm run install:frontend",
+    "prestart": "npm install && npm run install:backend && npm run install:frontend",
     "start": "concurrently \"npm run start:backend\" \"npm run start:frontend\""
   }
 }
