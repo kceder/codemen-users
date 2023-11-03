@@ -1,4 +1,4 @@
-User Frontend for Codemen
+User Frontend for Codemen (welp now it's a full-stack)
 A Vite React application that allows users to view, add, and delete users fetched from Firebase.
 
 ## To run the application
