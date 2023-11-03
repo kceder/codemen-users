@@ -1,28 +1,28 @@
-import ActionButton from "./DeleteButton";
+import ActionButton from "./ActionButton";
 
-const handleEditClick = (user, setShowModal, setEditUser) => {
-  console.log("Edit user:", user);
-  setShowModal(true);
-  setEditUser(user);
-};
+// Component to display a user in a table row
+// Every row has a delete and edit button
+// Rows have zebra striping
 
 const UserTableRow = ({ user, onDelete, index, setShowModal, setEditUser }) => {
   console.log("user", user);
   return (
     <tr
       className={
-        index % 2 === 0 ? "bg-gray-50 hover:bg-gray-100" : "hover:bg-gray-100"
+        index % 2 === 0
+          ? "bg-gray-50 hover:bg-gray-100 transition duration-200 ease-in-out"
+          : "hover:bg-gray-100 transition duration-200 ease-in-out"
       }
     >
-      <td className="text-left p-2 w-40">{user.name}</td>
-      <td className="text-left p-2 w-40">{user.email}</td>
-      <td className="text-left p-2 w-40">{user.phone}</td>
-      <td className="text-left p-2 w-40">{user.website}</td>
-      <td className="text-left p-2 w-40">{user.company.name}</td>
-      <td className="text-left p-2 w-40">{user.address.street}</td>
-      <td className="text-left p-2 w-20">
+      <td className="text-left p-2 w-40 font-sans">{user.name}</td>
+      <td className="text-left p-2 w-40 font-sans">{user.email}</td>
+      <td className="text-left p-2 w-40 font-sans">{user.phone}</td>
+      <td className="text-left p-2 w-40 font-sans">{user.website}</td>
+      <td className="text-left p-2 w-40 font-sans">{user.company.name}</td>
+      <td className="text-left p-2 w-40 font-sans">{user.address.street}</td>
+      <td className="text-left p-2 w-20 font-sans">
         <ActionButton // Button to delete user
-          action={onDelete}
+          action={() => onDelete(user.id)}
           label="Delete"
           color="text-red-500"
           hoverColor="hover:text-red-700"
@@ -30,7 +30,7 @@ const UserTableRow = ({ user, onDelete, index, setShowModal, setEditUser }) => {
       </td>
       <td className="text-left p-2 w-20">
         <ActionButton // Button to edit user
-          action={() => handleEditClick(user, setShowModal, setEditUser)}
+          action={() => { setShowModal(true); setEditUser(user); }}
           label="Edit"
           color="text-sky-500"
           hoverColor="hover:text-sky-700"

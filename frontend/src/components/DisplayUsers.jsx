@@ -1,21 +1,36 @@
 import React, { useState } from "react";
-import { useUser } from "../UserContext";
+import { useUser } from "../contexts/UserContext";
 import UserTableRow from "./UserTableRow";
-import ActionButton from "./DeleteButton";
+import ActionButton from "./ActionButton";
 import Pagination from "./Pagination";
+import axios from "axios";
+const baseUrl = "http://localhost:5000/users/";
 
-const DisplayUsers = ({ deleteUser, editUser, setShowModal, setEditUser }) => {
-  const { users } = useUser();
-  const [selectedUserId, setSelectedUserId] = useState(null);
+const DisplayUsers = ({ setShowModal, setEditUser }) => {
+  const { users, setUsers } = useUser(); // Gets the users from the UserContext
+  const [selectedUserId, setSelectedUserId] = useState(null); // Controls the user being displayed
 
-  const [currentPage, setCurrentPage] = useState(1);
-  const [usersPerPage] = useState(10); // Here we can change the number of users per page
+  const [currentPage, setCurrentPage] = useState(1); // Controls the current page
+  const [usersPerPage] = useState(10); // Controls the number of users per page
 
   const indexOfLastUser = currentPage * usersPerPage; // Counting the last user on the page
   const indexOfFirstUser = indexOfLastUser - usersPerPage; // Counting the first user on the page
   const currentUsers = users.slice(indexOfFirstUser, indexOfLastUser); // Getting the users for the current page
 
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+  const paginate = (pageNumber) => setCurrentPage(pageNumber); // Function to change the current page
+
+  const deleteUser = (userId) => {
+    console.log('userId', userId)
+    axios
+      .delete(`${baseUrl}${userId}`)
+      .then((response) => {
+        const newUsers = users.filter((user) => user.id !== userId); // Filters out the deleted user
+        setUsers(newUsers);
+      })
+      .catch((error) => {
+        console.error("Error deleting user:", error);
+      });
+  };
 
   return (
     <div className="mt-4 w-[90%]">
@@ -43,19 +58,16 @@ const DisplayUsers = ({ deleteUser, editUser, setShowModal, setEditUser }) => {
                 </div>
                 <div className="mt-4">
                   <ActionButton
+                    action={() => {setShowModal(true);setEditUser(user);}}
+                    label="Edit"
+                    color="text-sky-500"
+                    hoverColor="hover:text-sky-700"
+                  />
+                  <ActionButton
                     action={() => deleteUser(user.id)}
                     label="Delete"
                     color="text-red-500"
                     hoverColor="hover:text-red-700"
-                  />
-                  <ActionButton
-                    action={() => {
-                      setShowModal(true);
-                      setEditUser(user);
-                    }}
-                    label="Edit"
-                    color="text-sky-500"
-                    hoverColor="hover:text-sky-700"
                   />
                 </div>
               </div>
@@ -68,24 +80,12 @@ const DisplayUsers = ({ deleteUser, editUser, setShowModal, setEditUser }) => {
         <table className="text-gray-900 w-full border-collapse">
           <thead>
             <tr>
-              <th className="p-3 border-b border-gray-300 font-medium text-left">
-                Name
-              </th>
-              <th className="p-3 border-b border-gray-300 font-medium text-left">
-                Email
-              </th>
-              <th className="p-3 border-b border-gray-300 font-medium text-left">
-                Phone
-              </th>
-              <th className="p-3 border-b border-gray-300 font-medium text-left">
-                Website
-              </th>
-              <th className="p-3 border-b border-gray-300 font-medium text-left">
-                Company
-              </th>
-              <th className="p-3 border-b border-gray-300 font-medium text-left">
-                Address
-              </th>
+              <th className="p-3 border-b border-gray-300 font-medium text-left text-gray-700">Name</th>
+              <th className="p-3 border-b border-gray-300 font-medium text-left text-gray-700">Email</th>
+              <th className="p-3 border-b border-gray-300 font-medium text-left text-gray-700">Phone</th>
+              <th className="p-3 border-b border-gray-300 font-medium text-left text-gray-700">Website</th>
+              <th className="p-3 border-b border-gray-300 font-medium text-left text-gray-700">Company</th>
+              <th className="p-3 border-b border-gray-300 font-medium text-left text-gray-700">Address</th>
               <th className="p-1 border-b border-gray-300"></th>
               <th className="p-1 border-b border-gray-300"></th>
             </tr>
@@ -99,11 +99,6 @@ const DisplayUsers = ({ deleteUser, editUser, setShowModal, setEditUser }) => {
                 setShowModal={setShowModal}
                 setEditUser={setEditUser}
                 index={index}
-                className={
-                  index % 2 === 0
-                    ? "bg-gray-50 hover:bg-gray-100"
-                    : "hover:bg-gray-100"
-                }
               />
             ))}
           </tbody>

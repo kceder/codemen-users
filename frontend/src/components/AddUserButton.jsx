@@ -1,9 +1,9 @@
 const AddUserButton = ({ showModal, setShowModal }) => {
   return (
-    <div>
+    <div className="text-white">
       <button
         onClick={() => setShowModal(!showModal)}
-        className="bg-sky-500 hover:bg-sky-600 text-white border border-sky-600 py-2 px-4 rounded-2xl mb-4"
+        className="bg-sky-400 hover:bg-sky-600 border py-2 px-4 rounded-2xl mb-4 transition duration-200 ease-in-out"
       >
         Add User +
       </button>

@@ -1,3 +1,5 @@
+// A generic form input component that can be used for any form input field
+// value and type are given default values if not provided
 const FormInput = ({ label, name, value = "", onChange, type = "text", error }) => {
   return (
     <div className="mb-4 relative">

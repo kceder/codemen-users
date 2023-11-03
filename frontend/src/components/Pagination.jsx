@@ -1,13 +1,10 @@
 import React from "react";
-import 'font-awesome/css/font-awesome.min.css';
-
 
 const Pagination = ({ usersPerPage, totalUsers, paginate, currentPage }) => {
-
   const pageNumbers = [];
-  const maxPageNumber = Math.ceil(totalUsers / usersPerPage);
+  const maxPageNumber = Math.ceil(totalUsers / usersPerPage); // Round up to the next integer
 
-  for (let i = 1; i <= maxPageNumber; i++) {
+  for (let i = 1; i <= maxPageNumber; i++) {  // Create an array of page numbers
     pageNumbers.push(i);
   }
 
@@ -27,11 +24,7 @@ const Pagination = ({ usersPerPage, totalUsers, paginate, currentPage }) => {
           key={number}
           onClick={() => paginate(number)}
           className={`border rounded px-2 py-1 m-1 text-xs min-w-8
-                        ${
-                          currentPage === number
-                            ? "bg-sky-300 text-white"
-                            : "text-sky-500"
-                        }`}
+                    ${currentPage === number ? "bg-sky-400 text-white" : "text-sky-500"}`}
         >
           {number}
         </button>
