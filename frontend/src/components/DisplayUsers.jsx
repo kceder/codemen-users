@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useUser } from "../contexts/UserContext";
 import UserTableRow from "./UserTableRow";
-import ActionButton from "./ActionButton";
 import Pagination from "./Pagination";
+import UserCard from "./UserCard";
 import axios from "axios";
 const baseUrl = "http://localhost:5000/users/";
 
@@ -20,7 +20,6 @@ const DisplayUsers = ({ setShowModal, setEditUser }) => {
   const paginate = (pageNumber) => setCurrentPage(pageNumber); // Function to change the current page
 
   const deleteUser = (userId) => {
-    console.log('userId', userId)
     axios
       .delete(`${baseUrl}${userId}`)
       .then((response) => {
@@ -34,45 +33,18 @@ const DisplayUsers = ({ setShowModal, setEditUser }) => {
 
   return (
     <div className="mt-4 w-[90%]">
-      {/* Display users in cards on small screens */}
-      <div className="mb-16">
+      {/* Use UserCard component for mobile views */}
+      <div className="mb-16 lg:hidden">
         {users.map((user) => (
-          <div
+          <UserCard
             key={user.id}
-            className="lg:hidden border p-4 mb-2 rounded shadow hover:bg-gray-100 cursor-pointer transition duration-300 ease-in-out"
-            onClick={() =>
-              setSelectedUserId(selectedUserId === user.id ? null : user.id)
-            }
-          >
-            <div className="font-bold">{user.name}</div>
-            <div className="mt-2">
-              <div>Email: {user.email}</div>
-              <div>Phone: {user.phone}</div>
-            </div>
-            {selectedUserId === user.id && (
-              <div>
-                <div>Website: {user.website}</div>
-                <div>Company: {user.company.name}</div>
-                <div>
-                  Address: {user.address.city}, {user.address.street}
-                </div>
-                <div className="mt-4">
-                  <ActionButton
-                    action={() => {setShowModal(true);setEditUser(user);}}
-                    label="Edit"
-                    color="text-sky-500"
-                    hoverColor="hover:text-sky-700"
-                  />
-                  <ActionButton
-                    action={() => deleteUser(user.id)}
-                    label="Delete"
-                    color="text-red-500"
-                    hoverColor="hover:text-red-700"
-                  />
-                </div>
-              </div>
-            )}
-          </div>
+            user={user}
+            selectedUserId={selectedUserId}
+            setSelectedUserId={setSelectedUserId}
+            setShowModal={setShowModal}
+            setEditUser={setEditUser}
+            deleteUser={deleteUser}
+          />
         ))}
       </div>
       {/* Display users in a table on large screens */}

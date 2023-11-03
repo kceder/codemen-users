@@ -20,20 +20,20 @@ const UserTableRow = ({ user, onDelete, index, setShowModal, setEditUser }) => {
       <td className="text-left p-2 w-40 font-sans">{user.website}</td>
       <td className="text-left p-2 w-40 font-sans">{user.company.name}</td>
       <td className="text-left p-2 w-40 font-sans">{user.address.street}</td>
-      <td className="text-left p-2 w-20 font-sans">
-        <ActionButton // Button to delete user
-          action={() => onDelete(user.id)}
-          label="Delete"
-          color="text-red-500"
-          hoverColor="hover:text-red-700"
-        />
-      </td>
-      <td className="text-left p-2 w-20">
+      <td className="text-left p-2 font-sans w-6">
         <ActionButton // Button to edit user
           action={() => { setShowModal(true); setEditUser(user); }}
           label="Edit"
           color="text-sky-500"
           hoverColor="hover:text-sky-700"
+        />
+      </td>
+      <td className="text-left p-2 font-sans w-6">
+        <ActionButton // Button to delete user
+          action={() => onDelete(user.id)}
+          label="Delete"
+          color="text-red-500"
+          hoverColor="hover:text-red-700"
         />
       </td>
     </tr>

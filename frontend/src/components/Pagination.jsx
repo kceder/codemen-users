@@ -10,6 +10,7 @@ const Pagination = ({ usersPerPage, totalUsers, paginate, currentPage }) => {
 
   return (
     <nav className="mt-4 flex justify-center">
+      {/*Disable the button if we are on the first page*/}
       <button
         className="border rounded px-2 py-1 m-1 text-xs"
         style={{ color: currentPage === 1 ? "gray" : "blue" }}
@@ -18,9 +19,9 @@ const Pagination = ({ usersPerPage, totalUsers, paginate, currentPage }) => {
       >
         ←
       </button>
-
+      {/*Display the page numbers*/}
       {pageNumbers.map((number) => (
-        <button
+        <button 
           key={number}
           onClick={() => paginate(number)}
           className={`border rounded px-2 py-1 m-1 text-xs min-w-8
@@ -29,7 +30,7 @@ const Pagination = ({ usersPerPage, totalUsers, paginate, currentPage }) => {
           {number}
         </button>
       ))}
-
+      {/*Disable the button if we are on the last page*/}
       <button
         className="border rounded px-2 py-1 m-1 text-xs"
         style={{ color: currentPage === maxPageNumber ? "gray" : "blue" }}

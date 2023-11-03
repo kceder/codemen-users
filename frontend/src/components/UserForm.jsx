@@ -179,9 +179,9 @@ const UserForm = ({ submitForm, userToEdit }) => {
       />
       <button
         type="submit"
-        className="bg-sky-500 hover:bg-sky-700 text-white font-bold py-2 px-4 rounded"
+        className="bg-sky-500 hover:bg-sky-700 text-white font-bold py-2 px-4 rounded-xl"
       >
-        Submit
+        {userToEdit ? "Update" : "Add User"}
       </button>
     </form>
   );
