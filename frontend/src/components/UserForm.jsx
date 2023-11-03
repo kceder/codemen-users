@@ -56,7 +56,6 @@ const validateCity = (city) => {
 };
 
 const UserForm = ({ submitForm, userToEdit }) => {
-  console.log('userToEdit', userToEdit)
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -93,7 +92,6 @@ const UserForm = ({ submitForm, userToEdit }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Form submitted:", formData);
     const newErrors = {
       name: validateName(formData.name),
       email: validateEmail(formData.email),

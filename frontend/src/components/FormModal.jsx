@@ -8,10 +8,7 @@ const FormModal = ({ setShowModal, editUser, setEditUser }) => {
   const { users, setUsers } = useUser();
   const baseUrl = "http://localhost:5000/users";
 
-  console.log('editUser', editUser)
-
   const handleFormSubmit = (formData) => {
-    console.log("formData", formData);
 
     if (editUser) { // If user is being edited
       axios
@@ -24,7 +21,6 @@ const FormModal = ({ setShowModal, editUser, setEditUser }) => {
               return user;
             }
           });
-          console.log('updatedUsers', updatedUsers)
           setUsers(updatedUsers);
           setShowModal(false);
         })
@@ -36,7 +32,6 @@ const FormModal = ({ setShowModal, editUser, setEditUser }) => {
         .post(baseUrl, formData)
         .then((response) => {
           const updatedUsers = [...users, response.data];
-          console.log('updatedUsers', updatedUsers)
           setUsers(updatedUsers);
           setShowModal(false);
         })

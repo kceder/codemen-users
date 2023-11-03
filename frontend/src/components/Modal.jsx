@@ -1,5 +1,4 @@
 const Modal = ({ title, children, onClose }) => {
-  console.log('title', title)
   return (
     <div className="fixed inset-0 flex items-center justify-center z-50 w-auto">
       <div

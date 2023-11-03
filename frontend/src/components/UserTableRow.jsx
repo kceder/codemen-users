@@ -5,7 +5,6 @@ import ActionButton from "./ActionButton";
 // Rows have zebra striping
 
 const UserTableRow = ({ user, onDelete, index, setShowModal, setEditUser }) => {
-  console.log("user", user);
   return (
     <tr
       className={
