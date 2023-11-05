@@ -9,8 +9,8 @@ const UserTableRow = ({ user, onDelete, index, setShowModal, setEditUser }) => {
     <tr
       className={
         index % 2 === 0
-          ? "bg-gray-50 hover:bg-gray-100 transition duration-200 ease-in-out"
-          : "hover:bg-gray-100 transition duration-200 ease-in-out"
+          ? "bg-gray-50 hover:bg-gray-100 transition duration-200 ease-in-out h-16"
+          : "hover:bg-gray-100 transition duration-200 ease-in-out h-16"
       }
     >
       <td className="text-left p-2 w-40 font-sans">{user.name}</td>
